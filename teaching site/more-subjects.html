@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>More Subjects | EduHire</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+<style>
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:sans-serif;
+overflow-x:hidden;
+}
+
+.video-bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
+}
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(rgba(15,23,42,.88),rgba(79,70,229,.85));
+z-index:-1;
+}
+
+.input{
+width:100%;
+padding:16px;
+border-radius:16px;
+border:none;
+outline:none;
+background:rgba(255,255,255,.95);
+}
+
+.input:focus{
+box-shadow:0 0 0 4px rgba(99,102,241,.3);
+}
+
+.subject-checkbox:checked + div{
+background:#4f46e5;
+color:white;
+border-color:#4f46e5;
+transform:scale(1.03);
+}
+
+.card{
+backdrop-filter:blur(12px);
+background:rgba(255,255,255,.1);
+border:1px solid rgba(255,255,255,.15);
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.glow{
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{
+box-shadow:0 0 15px rgba(99,102,241,.4);
+}
+to{
+box-shadow:0 0 35px rgba(99,102,241,.9);
+}
+}
+
+/* FLOATING EFFECT */
+
+.float{
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0px);
+}
+50%{
+transform:translateY(-15px);
+}
+100%{
+transform:translateY(0px);
+}
+}
+
+/* FADE UP */
+
+.fade-up{
+animation:fadeUp 1.2s ease;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* PULSE BUTTON */
+
+.pulse-btn{
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%{
+box-shadow:0 0 0 0 rgba(34,197,94,.7);
+}
+70%{
+box-shadow:0 0 0 20px rgba(34,197,94,0);
+}
+100%{
+box-shadow:0 0 0 0 rgba(34,197,94,0);
+}
+}
+
+/* SUBJECT HOVER */
+
+.subject-card{
+transition:.4s;
+}
+
+.subject-card:hover{
+transform:translateY(-8px) scale(1.05);
+box-shadow:0 15px 40px rgba(99,102,241,.5);
+}
+
+/* FOOTER LINK ANIMATION */
+
+footer a{
+transition:.3s;
+}
+
+footer a:hover{
+letter-spacing:.5px;
+}
+
+/* SOCIAL ICON FLOAT */
+
+footer .fab{
+transition:.3s;
+}
+
+footer a:hover .fab{
+transform:rotate(10deg) scale(1.2);
+}
+
+</style>
+</head>
+
+<body class="text-white">
+
+<!-- VIDEO BACKGROUND -->
+
+<video autoplay muted loop playsinline class="video-bg">
+
+<source
+src="https://assets.mixkit.co/videos/preview/mixkit-students-walking-in-a-university-4519-large.mp4"
+type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<!-- NAVBAR -->
+
+<nav class="w-full fixed top-0 left-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
+
+<div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+
+<a href="index.html" class="flex items-center gap-3">
+
+<div class="w-12 h-12 rounded-2xl bg-indigo-600 flex items-center justify-center">
+<i class="fas fa-graduation-cap text-white"></i>
+</div>
+
+<h1 class="text-3xl font-bold">
+EduHire
+</h1>
+
+</a>
+
+<a href="index.html"
+class="bg-white text-indigo-700 px-6 py-3 rounded-full font-bold hover:bg-gray-200 transition">
+
+Back Home
+
+</a>
+
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="min-h-screen flex items-center justify-center px-4 py-32">
+
+<div class="max-w-5xl w-full">
+
+<div class="text-center mb-14 fade-up">
+
+<h1 class="text-5xl md:text-7xl font-black leading-tight mb-6">
+
+Choose Multiple Subjects <br>
+For Registration
+
+</h1>
+
+<p class="text-xl text-gray-200 max-w-2xl mx-auto">
+
+Select all the subjects you want and send them directly on WhatsApp instantly.
+
+</p>
+
+</div>
+
+<!-- FORM -->
+
+<div class="card rounded-[35px] p-8 md:p-12 glow float fade-up">
+
+<form id="moreSubjectsForm" class="space-y-8">
+
+<div class="grid md:grid-cols-2 gap-6">
+
+<input
+type="text"
+id="studentName"
+placeholder="Full Name"
+required
+class="input text-gray-800">
+
+<input
+type="tel"
+id="studentPhone"
+placeholder="Phone Number"
+required
+class="input text-gray-800">
+
+</div>
+
+<input
+type="email"
+id="studentEmail"
+placeholder="Email Address"
+required
+class="input text-gray-800">
+
+<!-- SUBJECTS -->
+
+<div>
+
+<h2 class="text-2xl font-bold mb-6">
+Select Subjects
+</h2>
+
+<div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+
+<!-- SUBJECT -->
+
+<label class="cursor-pointer">
+<input type="checkbox" name="subjects" value="Mathematics" class="subject-checkbox hidden">
+
+<div class="subject-card border border-white/20 rounded-2xl px-5 py-4 text-center transition duration-300 bg-white/10 hover:bg-white/20">
+Mathematics
+</div>
+</label>
+
+<label class="cursor-pointer">
+<input type="checkbox" name="subjects" value="Civic Education" class="subject-checkbox hidden">
+
+<div class="border border-white/20 rounded-2xl px-5 py-4 text-center transition duration-300 bg-white/10 hover:bg-white/20">
+Civic Education
+</div>
+</label>
+
+<label class="cursor-pointer">
+<input type="checkbox" name="subjects" value="English" class="subject-checkbox hidden">
+
+<div class="border border-white/20 rounded-2xl px-5 py-4 text-center transition duration-300 bg-white/10 hover:bg-white/20">
+English
+</div>
+</label>
+
+<label class="cursor-pointer">
+<input type="checkbox" name="subjects" value="Yoruba" class="subject-checkbox hidden">
+
+<div class="border border-white/20 rounded-2xl px-5 py-4 text-center transition duration-300 bg-white/10 hover:bg-white/20">
+Yoruba
+</div>
+</label>
+
+<label class="cursor-pointer">
+<input type="checkbox" name="subjects" value="Economics" class="subject-checkbox hidden">
+
+<div class="border border-white/20 rounded-2xl px-5 py-4 text-center transition duration-300 bg-white/10 hover:bg-white/20">
+Economics
+</div>
+</label>
+
+<label class="cursor-pointer">
+<input type="checkbox" name="subjects" value="Further Mathematics" class="subject-checkbox hidden">
+
+<div class="border border-white/20 rounded-2xl px-5 py-4 text-center transition duration-300 bg-white/10 hover:bg-white/20">
+Further Maths
+</div>
+</label>
+
+<label class="cursor-pointer">
+<input type="checkbox" name="subjects" value="Computer Science" class="subject-checkbox hidden">
+
+<div class="border border-white/20 rounded-2xl px-5 py-4 text-center transition duration-300 bg-white/10 hover:bg-white/20">
+Computer Science
+</div>
+</label>
+
+<label class="cursor-pointer">
+<input type="checkbox" name="subjects" value="Chemistry" class="subject-checkbox hidden">
+
+<div class="border border-white/20 rounded-2xl px-5 py-4 text-center transition duration-300 bg-white/10 hover:bg-white/20">
+Chemistry
+</div>
+</label>
+
+<label class="cursor-pointer">
+<input type="checkbox" name="subjects" value="Physics" class="subject-checkbox hidden">
+
+<div class="border border-white/20 rounded-2xl px-5 py-4 text-center transition duration-300 bg-white/10 hover:bg-white/20">
+Physics
+</div>
+</label>
+
+<label class="cursor-pointer">
+<input type="checkbox" name="subjects" value="Biology" class="subject-checkbox hidden">
+
+<div class="border border-white/20 rounded-2xl px-5 py-4 text-center transition duration-300 bg-white/10 hover:bg-white/20">
+Biology
+</div>
+</label>
+
+<label class="cursor-pointer">
+<input type="checkbox" name="subjects" value="Geography" class="subject-checkbox hidden">
+
+<div class="border border-white/20 rounded-2xl px-5 py-4 text-center transition duration-300 bg-white/10 hover:bg-white/20">
+Geography
+</div>
+</label>
+
+</div>
+
+</div>
+
+<textarea
+id="extraMessage"
+rows="5"
+placeholder="Additional Message (Optional)"
+class="input text-gray-800"></textarea>
+
+<button
+type="submit"
+class="w-full bg-green-500 hover:bg-green-600 py-5 rounded-2xl text-xl font-bold transition pulse-btn">
+
+<i class="fab fa-whatsapp mr-2"></i>
+
+ Send
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+const whatsappNumber = "2349167816893";
+
+document.getElementById("moreSubjectsForm")
+.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+let name =
+document.getElementById("studentName").value;
+
+let phone =
+document.getElementById("studentPhone").value;
+
+let email =
+document.getElementById("studentEmail").value;
+
+let messageText =
+document.getElementById("extraMessage").value;
+
+let selectedSubjects =
+document.querySelectorAll('input[name="subjects"]:checked');
+
+let subjects =
+Array.from(selectedSubjects)
+.map(subject => subject.value)
+.join(", ");
+
+if(subjects === ""){
+alert("Please select at least one subject.");
+return;
+}
+
+let message =
+`MORE SUBJECTS REGISTRATION
+
+Name: ${name}
+
+Phone: ${phone}
+
+Email: ${email}
+
+Selected Subjects:
+${subjects}
+
+Additional Message:
+${messageText}`;
+
+let url =
+`https://wa.me/${+2349167816893}?text=${encodeURIComponent(message)}`;
+
+window.open(url, "_blank");
+
+});
+
+window.addEventListener("load", () => {
+
+document.body.animate(
+[
+{ opacity: 0 },
+{ opacity: 1 }
+],
+{
+duration: 1200,
+easing: "ease"
+}
+);
+
+});
+
+</script>
+
+</body>
+
+<!-- FOOTER -->
+
+<footer class="bg-black/40 backdrop-blur-xl border-t border-white/10 text-white pt-20 pb-10">
+
+<div class="max-w-7xl mx-auto px-4">
+
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+<!-- BRAND -->
+
+<div>
+
+<div class="flex items-center gap-3 mb-6">
+
+<div class="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center">
+<i class="fas fa-graduation-cap"></i>
+</div>
+
+<h2 class="text-3xl font-bold">
+EduHire
+</h2>
+
+</div>
+
+<p class="text-gray-300 mb-6 leading-relaxed">
+
+Helping students across Nigeria master their future through quality education and expert tutoring.
+
+</p>
+
+<div class="flex gap-4">
+
+<a href="https://facebook.com"
+target="_blank"
+class="w-12 h-12 rounded-full bg-white/10 hover:bg-indigo-600 transition flex items-center justify-center hover:scale-110">
+
+<i class="fab fa-facebook-f"></i>
+
+</a>
+
+<a href="https://twitter.com"
+target="_blank"
+class="w-12 h-12 rounded-full bg-white/10 hover:bg-sky-500 transition flex items-center justify-center hover:scale-110">
+
+<i class="fab fa-twitter"></i>
+
+</a>
+
+<a href="https://instagram.com"
+target="_blank"
+class="w-12 h-12 rounded-full bg-white/10 hover:bg-pink-600 transition flex items-center justify-center hover:scale-110">
+
+<i class="fab fa-instagram"></i>
+
+</a>
+
+<a href="https://linkedin.com"
+target="_blank"
+class="w-12 h-12 rounded-full bg-white/10 hover:bg-blue-700 transition flex items-center justify-center hover:scale-110">
+
+<i class="fab fa-linkedin-in"></i>
+
+</a>
+
+</div>
+
+</div>
+
+<!-- QUICK LINKS -->
+
+<div>
+
+<h3 class="text-2xl font-bold mb-6">
+Quick Links
+</h3>
+
+<ul class="space-y-4 text-gray-300">
+
+<li>
+<a href="index.html"
+class="hover:text-white hover:translate-x-2 transition inline-block">
+Home
+</a>
+</li>
+
+<li>
+<a href="index.html#subjects"
+class="hover:text-white hover:translate-x-2 transition inline-block">
+Subjects
+</a>
+</li>
+
+<li>
+<a href="index.html#teachers"
+class="hover:text-white hover:translate-x-2 transition inline-block">
+Hire Teachers
+</a>
+</li>
+
+<li>
+<a href="index.html#jamb-form"
+class="hover:text-white hover:translate-x-2 transition inline-block">
+JAMB Prep
+</a>
+</li>
+
+<li>
+<a href="more-subjects.html"
+class="hover:text-white hover:translate-x-2 transition inline-block">
+More Subjects
+</a>
+</li>
+
+</ul>
+
+</div>
+
+<!-- SUBJECTS -->
+
+<div>
+
+<h3 class="text-2xl font-bold mb-6">
+Available Subjects
+</h3>
+
+<ul class="space-y-3 text-gray-300">
+
+<li>Mathematics</li>
+<li>English</li>
+<li>Physics</li>
+<li>Chemistry</li>
+<li>Biology</li>
+<li>Economics</li>
+<li>Computer Science</li>
+<li>Further Mathematics</li>
+
+</ul>
+
+</div>
+
+<!-- CONTACT -->
+
+<div>
+
+<h3 class="text-2xl font-bold mb-6">
+Contact
+</h3>
+
+<ul class="space-y-4 text-gray-300">
+
+<li class="flex items-center gap-3">
+<i class="fas fa-phone text-green-400"></i>
++234 916 781 6893
+</li>
+
+<li class="flex items-center gap-3">
+<i class="fas fa-envelope text-indigo-400"></i>
+info@eduhire.com
+</li>
+
+<li class="flex items-center gap-3">
+<i class="fas fa-location-dot text-red-400"></i>
+Lagos, Nigeria
+</li>
+
+</ul>
+
+<!-- WHATSAPP BUTTON -->
+
+<a href="https://wa.me/2349167816893"
+target="_blank"
+class="mt-8 inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 px-6 py-4 rounded-2xl font-bold transition hover:scale-105">
+
+<i class="fab fa-whatsapp text-xl"></i>
+
+Chat On WhatsApp
+
+</a>
+
+</div>
+
+</div>
+
+<!-- COPYRIGHT -->
+
+<div class="border-t border-white/10 pt-8 text-center text-gray-400 text-sm">
+
+© 2026 EduHire. All Rights Reserved.
+
+</div>
+
+</div>
+
+</footer>
+
+</html>
